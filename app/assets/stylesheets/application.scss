@@ -10,18 +10,18 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require font-awesome
  *= require social-share-button
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
 
 html {
   box-sizing: border-box;
-}
-*, *:before, *:after {
   box-sizing: inherit;
   font-family: 'Montserrat', sans-serif;
+}
+*, *:before, *:after {
 }
 
 a {
@@ -32,6 +32,7 @@ a:hover {
   text-decoration: none;
   color: inherit;
 }
+
 
 .header {
   padding: 30px;
@@ -51,15 +52,15 @@ a:hover {
 }
 
 .blog-title {
-  display: inline-block;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 30px;
 }
 
 .nav-container {
-  display: inline-block;
-  float: right;
+  /*display: inline-block;
+  float: right;*/
+  margin-bottom: 10px;
 }
 
 .nav-item {
@@ -67,7 +68,19 @@ a:hover {
   float: left;
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
-  padding: 5px 30px 0 30px;
+  padding: 5px 25px 0 25px;
+}
+
+.nav-item-wrapper {
+  float: right;
+}
+
+.user-info {
+  float: left;
+}
+
+.search-bar {
+  float: right;
 }
 
 .blog-post {
@@ -86,11 +99,36 @@ a:hover {
   max-width: 100%;
 }
 
+.content-wrapper {
+  position: relative;
+}
+
+.fav-button {
+  /*display: block;
+  margin: 0 auto;*/
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  top: -50px;
+  right: 48%;
+  background: #ccc;
+  border-radius: 100%;
+}
+
+.fav-icon {
+  height: 30px;
+  width: 60px;
+  font-size: 30px;
+  margin-top: 10px;
+  text-align: center;
+}
+
 .post-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 40px;
   text-align: center;
-  margin-top: 30px;
+  /*margin-top: 30px;*/
+  padding-top: 20px;
 }
 
 .post-title a {

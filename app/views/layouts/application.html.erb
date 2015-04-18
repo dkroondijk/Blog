@@ -2,49 +2,63 @@
 <html>
 <head>
   <title>De Blog</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 
   <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
 </head>
 
 <body>  
 
   <div class="container header">
-    <div class="blog-title">
-      <%= link_to "DE BLOG", root_path %>
-    </div>
-
-    <div class="nav-container">
-      <div class="nav-item">
-        <%= link_to "Home", root_path %>
-      </div>
-      <div class="nav-item">
-        <a href="">Blog</a>
-      </div>
-      <div class="nav-item">
-        <a href="">New Post</a>
-      </div>
-      <div class="nav-item">
-        <%= link_to "About", about_path %>
-      </div>
-      <div class="nav-item">
-        <a href="">Contact</a>
-      </div>        
-    </div>
 
     <div>
+      <div class="blog-title col-sm-5">
+        <%= link_to "DE BLOG", root_path %>
+      </div>
+      <div class="nav-container col-sm-7">
+        <div class="nav-item-wrapper">
+          <div class="nav-item">
+            <%= link_to "Home", root_path %>
+          </div>
+          <div class="nav-item">
+            <a href="">Blog</a>
+          </div>
+          <div class="nav-item">
+            <%= link_to "Favourites", favourites_path %>
+          </div>
+          <div class="nav-item">
+            <%= link_to "About", about_path %>
+          </div>
+          <div class="nav-item">
+            <a href="">Contact</a>
+          </div>
+          <div class="nav-item">
+            <a href="" class="fa fa-search" id="search"></a>          
+        </div>
+        </div>        
+      </div>      
+    </div>
+    <div class="user-info col-sm-5">
       <% if user_signed_in? %>
-        <span>Welcome <%= current_user.first_name %></span>
+        <span>Welcome <%= current_user.first_name %> | </span>
         <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "Log In", new_user_session_path %> |
         <%= link_to "Register", new_user_registration_path %>
       <% end %>
     </div>
-    
+
+    <div class="search-bar">
+      <%= form_tag root_path, method: "get" do %>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search" %>
+      <% end %>
+    </div>
+
+
     <div class="notice"><%= flash[:notice] || flash[:alert] %></div>
 
   </div>
