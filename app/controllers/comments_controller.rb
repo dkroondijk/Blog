@@ -1,46 +1,49 @@
 class CommentsController < ApplicationController
 
-  before_action :find_comment, only: [:show, :edit, :update, :destroy]
-
-  def index
-    if params[:search]
-      @comments = Comment.search(params[:search])
-    else
-      @comments = Comment.all
-    end
-  end
-
-  def new
-    @comment = Comment.new
-  end
+  before_action :authenticate_user!, only: [:create]
+#   before_action :find_comment, only: [:show, :edit, :update, :destroy]
 
   def create
-    @comment = Comment.new(comment_params)
-    if @comment.save
-      redirect_to comment_path(@comment)
-    else
-      render :new
+    @post         = Post.friendly.find(params[:post_id])
+    @comment      = Comment.new(comment_params)
+    @comment.user = current_user
+
+    # this associates the comment with a specific post
+    # otherwise the post_id would be blank
+    @comment.post = @post
+
+    # respond_to used for JS AJAX request called by form --> remote: true
+    respond_to do |format|
+      if @comment.save
+        # send notification email to post owner
+        PostMailer.notify_post_owner(@comment).deliver_later
+        # responds to html requests
+        format.html { redirect_to post_path(@post) }
+        # responds to js requests, will render "create.js.erb"
+        format.js { render }
+      else
+        format.html { render "/posts/show" }
+        format.js { render }
+      end
     end
+
   end
 
-  def show
-  end
+#   def edit
+#   end
 
-  def edit
-  end
+#   def update
+#     if @comment.update(comment_params)
+#       redirect_to comment_path(@comment)
+#     else
+#       render :edit
+#     end
+#   end
 
-  def update
-    if @comment.update(comment_params)
-      redirect_to comment_path(@comment)
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @comment.destroy
-    redirect_to comments_path
-  end
+#   def destroy
+#     @comment.destroy
+#     redirect_to comments_path
+#   end
 
 
   private
@@ -49,8 +52,8 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body)
   end
 
-  def find_comment
-    @comment = Comment.find(params[:id])
-  end  
+#   def find_comment
+#     @comment = Comment.find(params[:id])
+#   end  
   
 end

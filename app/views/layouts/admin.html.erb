@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div class = "container nav-bar">
+
+    <!-- <div class="user-info">
+      <%# if user_signed_in? %>
+        <p>Welcome <%= current_user.first_name %></p>
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+      <%# else %>
+        <%= link_to "Log In", new_user_session_path %> |
+        <%= link_to "Register", new_user_registration_path %>
+      <%# end %> -->
+
+      <%= link_to "Users", admin_users_path %>
+    </div>
+
+    <h2 class="nav-category">Pages</h2>
+
+    <div class="nav-item"><%= link_to "About", about_path %></div>
+    <div class="nav-item"><%= link_to "All Posts", root_path %></div>
+    <div class="nav-item"><%= link_to "Favourites", favourites_path %></div>
+
+  </div>
+
+
+  <div class="container notice"><%= flash[:notice] || flash[:alert] %></div>
+
+<%= yield %>
+
+</body>
+</html>

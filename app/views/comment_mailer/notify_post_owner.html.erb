@@ -1,0 +1,18 @@
+<p>Hello <%= @user.display_name %>,</p>
+<br>
+<p>Here is your daily summary of comments for your blog posts</p>
+
+<% @posts.each do |post| %>
+  <p>Post Title: <%= post.title %></p>
+  <p>Comments:</p>
+  <% post.comments.where("created_at >= ?", Time.zone.now.beginning_of_day).each do |comment| %>
+    <ul>
+      <li><%= comment.body %></li>
+      <li><%= comment.created_at %></li>
+    </ul>
+  <% end %>
+<% end %>
+<br>
+<p>Regards,</p>
+<br>
+<p>De Blog Team</p>
