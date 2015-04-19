@@ -3,15 +3,19 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:edit, :update, :destroy]
 
 	def index
-    if user_signed_in?
+  
       if params[:search]
         @posts = Post.search(params[:search]).most_recent
       else
   		  @posts = Post.all.most_recent
       end
-    else
-      @posts = Post.all.most_recent
-    end
+
+      if params[:active_tag]
+        @posts = Post.includes(:tags).where(:tags => {name: params[:active_tag]}).references(:tags)
+      else
+        @posts = Post.all.most_recent
+      end
+    
 	end
 
 	def new

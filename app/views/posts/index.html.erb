@@ -13,10 +13,6 @@
 
 <div class="container article">
 
-  <%#= link_to "Create New Post", new_post_path, class: "btn btn-primary" %>
-  <br>
-  <br>
-
   <% @posts.each do |post| %>
     <div class="blog-post">
       <%= link_to image_tag(post.image.url), post_path(post), class: "post-image" %>
@@ -32,7 +28,7 @@
 
         <div class="tag-bar">
           <% post.tags.each do |tag| %>
-            <%= link_to tag.name, root_path, class: "tag" %>
+            <%= render partial: "/tags/tag", locals: {tag: tag} %>
           <% end %>
         </div>
 
