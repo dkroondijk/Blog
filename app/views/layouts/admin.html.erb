@@ -1,39 +1,71 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>My Blog</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>De Blog</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
 
-  <div class = "container nav-bar">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  </head>
 
-    <!-- <div class="user-info">
-      <%# if user_signed_in? %>
-        <p>Welcome <%= current_user.first_name %></p>
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-      <%# else %>
-        <%= link_to "Log In", new_user_session_path %> |
-        <%= link_to "Register", new_user_registration_path %>
-      <%# end %> -->
+  <body>  
 
-      <%= link_to "Users", admin_users_path %>
+    <div class="container header">
+
+      <div>
+        <div class="blog-title col-sm-5">
+          <%= link_to "DE BLOG", root_path %>
+        </div>
+        <div class="nav-container col-sm-7">
+          <div class="nav-item-wrapper">
+            <div class="nav-item">
+              <%= link_to "Home", root_path %>
+            </div>
+            <div class="nav-item" id="blog-menu">
+              <a href="">Blog</a>
+              <ul class="blog-dropdown">
+                <li><%= link_to "All Posts", posts_path %></li>
+                <li><%= link_to "New Post", new_post_path %></li>
+              </ul>
+            </div>
+            <div class="nav-item">
+              <%= link_to "Favourites", favourites_path %>
+            </div>
+            <div class="nav-item">
+              <%= link_to "About", about_path %>
+            </div>
+            <div class="nav-item">
+              <a href="">Contact</a>
+            </div>
+            <div class="nav-item">
+              <a href="javascript:void(0);" class="fa fa-search" id="search"></a>    
+            </div>
+          </div>        
+        </div>      
+      </div>
+      <div class="user-info col-sm-5">
+        <% if user_signed_in? %>
+          <span>Welcome <%= current_user.first_name %> | </span>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "Log In", new_user_session_path %> |
+          <%= link_to "Register", new_user_registration_path %>
+        <% end %>
+      </div>
+
+      <div class="search-bar">
+        <%= form_tag root_path, method: "get" do %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search" %>
+        <% end %>
+      </div>
+
+      <div class="notice"><%= flash[:notice] || flash[:alert] %></div>
+
     </div>
 
-    <h2 class="nav-category">Pages</h2>
+    <%= yield %>
 
-    <div class="nav-item"><%= link_to "About", about_path %></div>
-    <div class="nav-item"><%= link_to "All Posts", root_path %></div>
-    <div class="nav-item"><%= link_to "Favourites", favourites_path %></div>
-
-  </div>
-
-
-  <div class="container notice"><%= flash[:notice] || flash[:alert] %></div>
-
-<%= yield %>
-
-</body>
+  </body>
 </html>

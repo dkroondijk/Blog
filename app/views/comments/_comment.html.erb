@@ -1,8 +1,14 @@
- <div class="blog-post">
-  <span class="user-comment"><%= comment.user.display_name %></span>
-  posted <%= comment.time_since_post %> minutes ago.<br>
-  <p><%= comment.body %></p>
-
-  <%= link_to fa_icon("plus-square-o"), comment_votes_path(comment, {vote: {is_up: true}}), method: :post %>          
-  <%= link_to fa_icon("minus-square-o"), comment_votes_path(comment, {vote: {is_up: true}}), method: :patch %>          
+ <div class="comment">
+  <div>
+    <p class="user-comment">
+      <strong><%= comment.user.display_name %></strong>
+      posted <%= comment.time_since_post %> minutes ago.
+    </p>
+    <p><%= comment.body %></p>
+  </div>
+  <div>
+    <%= link_to fa_icon("plus-square-o"), comment_votes_path(comment, {vote: {is_up: true}}), method: :post %>          
+    <%= link_to fa_icon("minus-square-o"), comment_votes_path(comment, {vote: {is_up: true}}), method: :patch %>          
+  </div> 
+    
 </div>

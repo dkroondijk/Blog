@@ -33,6 +33,20 @@ a:hover {
   color: inherit;
 }
 
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul.blog-dropdown {
+  position: fixed;
+}
+ul.blog-dropdown li {
+  /*border: 1px solid black;*/
+  padding: 5px;
+  font-size: 14px;
+  background: white;
+}
 
 .header {
   padding: 30px;
@@ -104,8 +118,6 @@ a:hover {
 }
 
 .fav-button {
-  /*display: block;
-  margin: 0 auto;*/
   height: 60px;
   width: 60px;
   position: absolute;
@@ -186,4 +198,22 @@ a:hover {
 .bottom-border {  
   height: 22px;
   border-bottom: 1px dotted #ccc;
+}
+
+.post-buttons {
+  display: block;
+  width: 15%;
+  height: 34px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.comment {
+  background: #f8f8f8;
+  margin-bottom: 20px;
+  padding: 20px 40px 20px 40px;
+}
+
+.comment-form {
+  margin-bottom: 30px;
 }
