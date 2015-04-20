@@ -72,6 +72,13 @@ ul.blog-dropdown li {
   font-size: 30px;
 }
 
+.blog-title-favourites {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+}
+
 .nav-container {
   /*display: inline-block;
   float: right;*/
@@ -134,6 +141,10 @@ ul.blog-dropdown li {
   font-size: 30px;
   margin-top: 10px;
   text-align: center;
+}
+
+.pink {
+  color: pink;
 }
 
 .post-title {
@@ -240,4 +251,9 @@ ul.blog-dropdown li {
 .vote-count {
   font-weight: bold;
   text-align: center;
+}
+
+.like-button {
+  display: inline-block;
+  float: right;
 }

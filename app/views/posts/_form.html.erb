@@ -10,7 +10,7 @@
   <%= form_for @post do |f| %>
     <div class="form-group">
       <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control" %>
+      <%= f.text_field :title, class: "form-control", autofocus: true %>
     </div>
     <div class="form-group">
       <%= f.label :body %>
@@ -19,7 +19,7 @@
     <div class="form-group">
       <%= f.fields_for :tags, Tag.new do |t| %>
         <%= t.label :name, "Tag Name" %>
-        <%= t.text_field :name, class: "form-control" %>
+        <%= t.text_field :name, class: "form-control", placeholder: "tags, separated, by, commas" %>
       <% end %>
     </div>
     <div class="form-group">

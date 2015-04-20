@@ -2,13 +2,24 @@
 
   <div class = "blog-post">
     <%= image_tag @post.image.url, class: "post-image" %>
-    <h2 class="post-title"><%= @post.title %></h2>
+    <h3 class="post-title"><%= @post.title %></h3>
     <div class="post-details">
       <%= @post.user.display_name %> -
       <%= formatted_date(@post.created_at) %>
     </div>
     <p class="post-body-preview"><%= @post.body %></p>
     <!-- <p>By <strong><%#= @post.user.display_name %></strong></p> -->
+
+    <div class="like-button">
+      <% like = @post.likes.find_by_user_id(current_user) if current_user %>
+      <% if like %>
+        <%= link_to fa_icon("thumbs-up"), post_like_path(@post, like), method: :delete, data: {disable_with: "deleting..."} %>
+      <% else %>
+        <%= link_to fa_icon("thumbs-o-up"), post_likes_path(@post), method: :post %>
+      <% end %>
+      <span> <%= @post.likes.count %></span>
+    </div>
+
   </div>
   <br>
   <div>

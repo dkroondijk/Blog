@@ -25,7 +25,6 @@ $(document).ready(function() {
     $('.search-bar').slideToggle();
   });
 
-
   $('#blog-menu').mouseenter(function() {
     $('.blog-dropdown').fadeIn();
     return false;
@@ -34,6 +33,11 @@ $(document).ready(function() {
   $('#blog-menu').mouseleave(function() {
     $('.blog-dropdown').fadeOut();
     return false;
+  });
+
+  $('.fav-icon').hover(function(){
+    $('.fav-icon').addClass('.pink');
+    $('.fav-icon').removeClass('.pink');
   });
 });
   
