@@ -1,14 +1,15 @@
  <div class="comment">
-  <div>
-    <p class="user-comment">
+  <div class="comment-content">
+    <p class="comment-user">
       <strong><%= comment.user.display_name %></strong>
-      posted <%= comment.time_since_post %> minutes ago.
+      posted <%= comment.time_since_post %> ago.
     </p>
     <p><%= comment.body %></p>
+    <!-- <p><%#= comment.created_at.to_formatted_s(:long) %></p> -->
   </div>
-  <div>
-    <%= link_to fa_icon("plus-square-o"), comment_votes_path(comment, {vote: {is_up: true}}), method: :post %>          
-    <%= link_to fa_icon("minus-square-o"), comment_votes_path(comment, {vote: {is_up: true}}), method: :patch %>          
-  </div> 
+  <div class="vote-button">
+    <%= render partial: "/votes/vote", locals: {comment: comment} %> 
+  </div>
     
 </div>
+    

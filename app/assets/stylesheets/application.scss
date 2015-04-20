@@ -210,11 +210,34 @@ ul.blog-dropdown li {
 }
 
 .comment {
+  position: relative;
   background: #f8f8f8;
   margin-bottom: 20px;
-  padding: 20px 40px 20px 40px;
+  padding: 30px 40px 30px 40px;
 }
 
 .comment-form {
   margin-bottom: 30px;
+}
+
+.comment-content {
+  display: inline-block;
+  max-width: 50%;
+}
+
+.vote-button {
+  display: inline-block;
+  position: absolute;
+  /*font-size: 30px;*/
+  top: 15px;
+  right: 30px;
+}
+
+.vote-button-icon {
+  text-align: center;
+}
+
+.vote-count {
+  font-weight: bold;
+  text-align: center;
 }

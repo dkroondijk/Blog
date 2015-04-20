@@ -24,5 +24,7 @@ module Blog
     config.active_record.raise_in_transactional_callbacks = true
     # queue adapter for delayed_job gem
     config.active_job.queue_adapter = :delayed_job
+    # show local time zone
+    # config.active_record.default_timezone = :local
   end
 end
