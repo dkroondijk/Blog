@@ -1,9 +1,73 @@
-<h1>All Posts</h1>
+<!-- placeholder -->
+<%# current_user.favourited_posts.each do |fav| %>
+  <%#= fav.title %>
+<%# end %>
 
-<%= link_to "Create New Post", new_post_path %>
-<br>
-<br>
-<% @posts.each do |post| %>
-	<%= post.title %>
-	<hr>
-<% end %>
+<!-- See posts.coffee -->
+<%#= link_to "Button", "javascript:void(0)", class: "btn" %>
+<!-- <ul>
+  <li>
+    <input type="checkbox" class="complete">adfadsgf
+  </li>
+</ul> -->
+
+<div class="container article">
+
+  <% @posts.each do |post| %>
+    <div class="blog-post">
+      <%= link_to image_tag(post.image.url), post_path(post), class: "post-image" %>
+      <div class="content-wrapper">
+        <div class="fav-button">
+          <%= render partial: "favourites/favourite", locals: {post: post} %>    
+        </div>
+        <h2 class="post-title"><%= link_to post.title, post_path(post) %></h2>
+        <div class="post-details">
+          <%= post.user.display_name %> -
+          <%= formatted_date(post.created_at) %>
+        </div>
+
+        <div class="tag-bar">
+          <% post.tags.each do |tag| %>
+            <%= render partial: "/tags/tag", locals: {tag: tag} %>
+          <% end %>
+        </div>
+
+        <p class="post-body-preview">
+          <%= link_to post.body.truncate(350, separator: ' '), post_path(post) %>
+        </p>
+
+        <div class="social-media-links">
+          <div class="col-md-4 bottom-border"></div>
+          <div class="col-md-4">
+            <%= social_share_button_tag(post.title) %>
+            <!-- <a href="" class="icon ion-social-facebook"></a>
+            <a href="" class="icon ion-social-twitter"></a>
+            <a href="" class="icon ion-social-pinterest"></a>
+            <a href="" class="icon ion-social-googleplus"></a>  -->         
+          </div>
+          <div class="col-md-4 bottom-border"></div>
+        </div>
+        
+      </div>
+
+    </div>
+  <% end %>
+</div>
+
+      <%# like = post.likes.find_by_user_id(current_user) if current_user %>
+
+      <%# if like %>
+        <%#= link_to fa_icon("thumbs-up"), post_like_path(post, like), method: :delete, data: {disable_with: "deleting..."} %>
+      <%# else %>
+        <%#= link_to fa_icon("thumbs-o-up"), post_likes_path(post), method: :post %>
+      <%# end %>
+
+      <%#= post.likes.count %>
+
+      
+        
+
+
+
+
+

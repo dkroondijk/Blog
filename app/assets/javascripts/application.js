@@ -12,5 +12,32 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+
+//= require bootstrap-sprockets
+//= require social-share-button
 //= require_tree .
+
+$(document).ready(function() {
+  $('.search-bar').hide();
+  $('.blog-dropdown').hide();
+
+  $('#search').click(function() {
+    $('.search-bar').slideToggle();
+  });
+
+  $('#blog-menu').mouseenter(function() {
+    $('.blog-dropdown').fadeIn();
+    return false;
+  });
+
+  $('#blog-menu').mouseleave(function() {
+    $('.blog-dropdown').fadeOut();
+    return false;
+  });
+
+  $('.fav-icon').hover(function(){
+    $('.fav-icon').addClass('.pink');
+    $('.fav-icon').removeClass('.pink');
+  });
+});
+  

@@ -1,0 +1,26 @@
+<div class="container article">  
+
+  <h1>Admin::Users#index</h1>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+      <td><%= user.email %></td>
+      <td>
+        <% if user.is_admin %>
+          <%= link_to "Remove Admin", admin_user_path(user, user: {is_admin: false}), method: :patch, class: "btn btn-default" %>
+        <% else %>
+          <%= link_to "Make Admin", admin_user_path(user, user: {is_admin: true}), method: :patch, class: "btn btn-info" %>
+        <% end %>
+      </td>
+      </tr>
+    <% end %>    
+  </table>
+</div>

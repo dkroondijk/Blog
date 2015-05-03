@@ -1,0 +1,7 @@
+<div class="comment-form">
+  <%= simple_form_for @comment, url: post_comments_path(@post), remote: true do |f| %>
+    <%= f.input :body, label: false %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
+  

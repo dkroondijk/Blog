@@ -1,0 +1,53 @@
+<div class="container article">
+
+  <div class = "blog-post">
+    <%= image_tag @post.image.url, class: "post-image" %>
+    <h3 class="post-title"><%= @post.title %></h3>
+    <div class="post-details">
+      <%= @post.user.display_name %> -
+      <%= formatted_date(@post.created_at) %>
+    </div>
+    <p class="post-body-preview"><%= @post.body %></p>
+    <!-- <p>By <strong><%#= @post.user.display_name %></strong></p> -->
+
+    <div class="like-button">
+      <% like = @post.likes.find_by_user_id(current_user) if current_user %>
+      <% if like %>
+        <%= link_to fa_icon("thumbs-up"), post_like_path(@post, like), method: :delete, data: {disable_with: "deleting..."} %>
+      <% else %>
+        <%= link_to fa_icon("thumbs-o-up"), post_likes_path(@post), method: :post %>
+      <% end %>
+      <span> <%= @post.likes.count %></span>
+    </div>
+
+  </div>
+  <br>
+  <div>
+    <div class="post-buttons btn-group">
+      <% if can? :edit, @post %>
+        <%= link_to "Edit", edit_post_path(@post), class: "btn btn-primary" %>
+      <% end %>
+      <% if can? :destroy, @post %>
+        <%= link_to "Delete", post_path(@post), class: "btn btn-danger", method: :delete, data: {confirm: "Are you sure you want to delete this post?"} %>
+      <% end %>      
+    </div>
+  </div> 
+    
+  <div>
+    <h3>Comments</h3>
+    <div class="comments">
+      <% @comments.each do |comment| %>
+       <%= render partial: "/comments/comment", locals: {comment: comment} %>
+      <% end %>        
+    </div>
+
+    <div class="comment_form">
+      <%= render "/comments/comment_form" %>
+    </div>
+    
+  </div>
+  
+</div>
+
+
+      

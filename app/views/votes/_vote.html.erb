@@ -1,0 +1,37 @@
+<div id="<%= dom_id(comment) %>">
+
+    <% vote = comment.votes.find_by_user_id(current_user) if current_user %>
+    <% if vote %>
+      <% if vote.is_up? %>
+        <div class="vote-button-icon">
+          <%= link_to fa_icon("caret-up 3x"), comment_vote_path(comment, vote), method: :delete, remote: true %> 
+        </div>
+        <div class="vote-count">
+          <%= comment.votes_count %>
+        </div>
+        <div class="vote-button-icon">
+          <%= link_to fa_icon("chevron-down 2x"), comment_vote_path(comment, vote, {vote: {is_up: false}}), method: :patch, remote: true %>
+        </div>          
+      <% else %>
+        <div class="vote-button-icon">
+          <%= link_to fa_icon("chevron-up 2x"), comment_vote_path(comment, vote, {vote: {is_up: true}}), method: :patch, remote: true %> 
+        </div>
+        <div class="vote-count">
+          <%= comment.votes_count %>
+        </div>
+        <div class="vote-button-icon">
+          <%= link_to fa_icon("caret-down 3x"), comment_vote_path(comment, vote), method: :delete, remote: true %>
+        </div>          
+      <% end %>
+    <% else %>
+      <div class="vote-button-icon">
+        <%= link_to fa_icon("chevron-up 2x"), comment_votes_path(comment, {vote: {is_up: true}}), method: :post, remote: true %>        
+      </div>
+      <div class="vote-count">
+        <%= comment.votes_count %>
+      </div>
+      <div class="vote-button-icon">
+        <%= link_to fa_icon("chevron-down 2x"), comment_votes_path(comment, {vote: {is_up: false}}), method: :post, remote: true %>        
+      </div>
+    <% end %>
+  </div>

@@ -1,11 +1,44 @@
 Rails.application.routes.draw do
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
+  namespace :admin do
+    resources :users
+  end
+
+  resources :votes
+  devise_for :users, :controllers => { :registrations => "registrations" }
   root "posts#index"
-  
+
   get "/about" => "home#about", as: :about
 
-  get "/posts"      => "posts#index"
-  get "/posts/new"  => "posts#new", as: :new_post
+  resources :posts do
+    resources :comments
+    resources :likes, only: [:create, :destroy]
+    resources :favourites, only: [:create, :destroy]
+  end
+
+  resources :favourites, only: [:index]
+
+  resources :comments do
+    resources :votes, only: [:create, :update, :destroy]
+  end
+
+  # get "/posts"          => "posts#index"
+  # get "/posts/new"      => "posts#new", as: :new_post
+  # post "/posts"         => "posts#create"
+  # get "/posts/:id"      => "posts#show", as: :post
+  # get "/posts/:id/edit" => "posts#edit", as: :edit_post
+  # patch "/posts/:id"    => "posts#update"
+  # delete "/posts/:id"   => "posts#destroy"
+
+  # get "/comments"           => "comments#index"
+  # get "/comments/new"       => "comments#new", as: :new_comment
+  # post "/comments"          => "comments#create"
+  # get "/comments/:id"       => "comments#show", as: :comment
+  # get "/comments/:id/edit"  => "comments#edit", as: :edit_comment
+  # patch "/comments/:id"     => "comments#update"
+  # delete "/comments/:id"    => "comments#destroy"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

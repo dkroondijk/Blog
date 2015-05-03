@@ -1,0 +1,29 @@
+<div class="container article">
+
+  <h1 class="blog-title-favourites">Your Favorite Posts</h1>
+
+  <% @posts.each do |post| %>
+    <div class="blog-post">
+      <%= image_tag post.image.url, class: "post-image" %>
+      <h3 class="post-title"><%= link_to post.title, post_path(post) %></h3>
+      <div class="post-details">
+        <%= post.user.display_name %> -
+        <%= formatted_date(post.created_at) %>
+      </div>
+      <p class="post-body-preview"><%= post.body %></p>
+
+      
+
+        
+
+      <%# favourite = post.favourites.find_by_user_id(current_user) if current_user %>
+
+      <%# if favourite %>
+        <%#= link_to fa_icon("heart"), post_favourite_path(post, favourite), method: :delete %>
+      <%# else %>
+        <%#= link_to fa_icon("heart-o"), post_favourites_path(post), method: :post %>
+      <%# end %>
+
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,15 @@
+ <div class="comment">
+  <div class="comment-content">
+    <p class="comment-user">
+      <strong><%= comment.user.display_name %></strong>
+      posted <%= comment.time_since_post %> ago.
+    </p>
+    <p><%= comment.body %></p>
+    <!-- <p><%#= comment.created_at.to_formatted_s(:long) %></p> -->
+  </div>
+  <div class="vote-button">
+    <%= render partial: "/votes/vote", locals: {comment: comment} %> 
+  </div>
+    
+</div>
+    
